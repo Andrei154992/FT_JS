@@ -1,97 +1,94 @@
-function Task_1(x, y, z)
-{
-    if (x > y && z > y) return x*z
-    else if (y > x && z > x) return y*z
-    else return x*y
+const student = {
+    second_name: "Белогородцев",
+    first_name: "Виктор",
+    marks: [
+        {
+            subject: "Русский язык",
+            mark: 3
+        },
+        {
+            subject: "Математика",
+            mark: 3
+        },
+        {
+            subject: "Информатика",
+            mark: 5
+        }        
+    ]
 }
 
-function Task_2(name, rank = "рядовой") 
-{
-    alert(`Здравствуйте, ${rank} ${name}!`);
+function Output_inf(obj){
+    console.log("Фамилия: " + obj.second_name)
+    console.log("Имя: " + obj.first_name)
+    console.log("Успеваемость:")
+    obj.marks.forEach(mark => {
+        console.log("\t" + mark.subject + ": " + mark.mark);
+    });
 }
 
-function Task_3(func, ...args) 
-{
-    return func(...args);
-}
+class Student{
+    constructor(second_name, first_name, marks){
+        this.second_name = second_name;
+        this.first_name = first_name;
+        this.marks = marks;
+    } 
 
-function Task_4(x){
-
-    if (Number.isInteger(x)){
-        if (x % 2 === 0) {
-            return (x) => x ** 2;
-        } else {
-            return (x) => x ** 3;
-        }
+    output_all_subject(){
+        console.log("Информация по всем предметам: ")
+        this.marks.forEach(mark => {
+            console.log("\t" + mark.subject + ": " + mark.mark)
+        });
     }
-    else{
-        alert("Число должно быть целым")
-    }
-}
 
-function Task_5(n){
+    average_mark() {
+        let result = 0;
+        marks.forEach(mark => {
+            result += mark.mark
+        });
+        result /= marks.length
+        console.log(`Средняя оценка: ${result}`)
+    } 
 
-    if (Number.isInteger(n)){
-        if (n === 0 || n === 1) 
-            return 1;    
-        return n * Task_5(n - 1);
-    }
-    else{
-        alert("Число должно быть целым")
-    }
-}
-
-
-let b = true;
-
-while(b){
-    alert("МЕНЮ\n1 - Задание №1\n2 - Задание №2\n3 - Задание №3\n4 - Задание №4\n5 - Задание №5\n0 - Завершение работы")
-    
-    const input = prompt("Введите номер пункта меню")
-    number = parseInt(input)
-    switch(number){
-        case 1:
-            alert("Задание 1")
-            alert("Необходимо ввести целые числа")
-            input1 = prompt("Введите первое число")
-            num1 = parseInt(input1)
-            input2 = prompt("Введите второе число")
-            num2 = parseInt(input2)
-            input3 = prompt("Введите третье число")
-            num3 = parseInt(input3)
-            alert("Ответ: " + Task_1(num1, num2, num3))
-            break;
-        case 2:
-            alert("Задание 2")
-            input1 = prompt("Введите имя")
-            input2 = prompt("Введите звание")
-            if (input2 == ""){
-                Task_2(input1)
+    output_all_marks(subject){
+        console.log(`Все оценки по предмету ${subject}: `)
+        this.marks.forEach(mark => {
+            if (subject === mark.subject){
+                console.log("\t" + mark.mark)
             }
-            else{
-                Task_2(input1, input2)
-            }
-            break;
-        case 3:
-            alert("Задание 3")
-            alert("Функция: Task_5\nПараметр: 5")
-            alert("Ответ: " + Task_3(Task_5, 5))
-            break;
-        case 4:
-            alert("Задание 4")
-            input1 = prompt("Введите число: ")            
-            num1 = parseInt(input1)
-            alert("Ответ: " + Task_4(num1))
-            break;
-        case 5:
-            alert("Задание 5")
-            input1= prompt("Введите число: ")          
-            num1 = parseInt(input1)
-            alert("Факториал числа: " + Task_5(num1))
-            break;
-        case 0:
-            alert("Завершение работы...")
-            b = false;
-            break;
+        });
+    }
+
+    add_mark(subject, mark){
+        const new_mark = new Mark(subject, mark);
+        this.marks.push(new_mark);
+    }
+
+    delete_mark(subject){
+        this.marks = this.marks.filter(mark => mark.subject !== subject);
+        console.log(`Удаление предмета ${subject} прошло успешно`)
     }
 }
+
+class Mark{
+    constructor(subject, mark){
+        this.subject = subject;
+        this.mark = mark;
+    }
+}
+
+const marks = [
+    new Mark("Математика", 3),
+    new Mark("Физика", 3),
+    new Mark("Химия", 5)
+];
+
+const student1 = new Student("Иванов", "Иван", marks);
+
+Output_inf(student)
+console.log("===================")
+student1.add_mark("Математика", 5)
+student1.output_all_marks("Математика")
+student1.delete_mark("Математика")
+student1.output_all_marks("Математика")
+student1.output_all_subject();
+student1.average_mark();
