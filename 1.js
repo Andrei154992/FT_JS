@@ -1,94 +1,94 @@
-const student = {
-    second_name: "Белогородцев",
-    first_name: "Виктор",
-    marks: [
-        {
-            subject: "Русский язык",
-            mark: 3
-        },
-        {
-            subject: "Математика",
-            mark: 3
-        },
-        {
-            subject: "Информатика",
-            mark: 5
-        }        
-    ]
+class Figure
+{
+    #x;
+    #y;
+
+    constructor(x, y){
+        this.#x = x;
+        this.#y = y;
+    }
+
+    get x() {
+        return this.#x;
+    }
+
+    get y() {
+        return this.#y;
+    }
+    set x(value) {
+        this.#x = value;
+    }
+
+    set y(value) {
+        this.#y = value;
+    }
+
+    square(){
+        return undefuned
+    }
+     
 }
 
-function Output_inf(obj){
-    console.log("Фамилия: " + obj.second_name)
-    console.log("Имя: " + obj.first_name)
-    console.log("Успеваемость:")
-    obj.marks.forEach(mark => {
-        console.log("\t" + mark.subject + ": " + mark.mark);
-    });
-}
+class Circle extends Figure 
+{
+    #r;
 
-class Student{
-    constructor(second_name, first_name, marks){
-        this.second_name = second_name;
-        this.first_name = first_name;
-        this.marks = marks;
-    } 
-
-    output_all_subject(){
-        console.log("Информация по всем предметам: ")
-        this.marks.forEach(mark => {
-            console.log("\t" + mark.subject + ": " + mark.mark)
-        });
+    constructor(x, y, r){
+        super(x, y);
+        this.#r = r;
     }
 
-    average_mark() {
-        let result = 0;
-        marks.forEach(mark => {
-            result += mark.mark
-        });
-        result /= marks.length
-        console.log(`Средняя оценка: ${result}`)
-    } 
-
-    output_all_marks(subject){
-        console.log(`Все оценки по предмету ${subject}: `)
-        this.marks.forEach(mark => {
-            if (subject === mark.subject){
-                console.log("\t" + mark.mark)
-            }
-        });
-    }
-
-    add_mark(subject, mark){
-        const new_mark = new Mark(subject, mark);
-        this.marks.push(new_mark);
-    }
-
-    delete_mark(subject){
-        this.marks = this.marks.filter(mark => mark.subject !== subject);
-        console.log(`Удаление предмета ${subject} прошло успешно`)
+    square(){
+        return Math.PI * this.#r ** 2
     }
 }
 
-class Mark{
-    constructor(subject, mark){
-        this.subject = subject;
-        this.mark = mark;
+class Rectangle extends Figure
+{
+    #h;
+    #w;
+    constructor(x, y, h, w){
+        super(x, y);
+        this.#h = h;
+        this.#w = w;
+    }
+
+    square(){
+        return this.#h * this.#w
     }
 }
 
-const marks = [
-    new Mark("Математика", 3),
-    new Mark("Физика", 3),
-    new Mark("Химия", 5)
-];
-
-const student1 = new Student("Иванов", "Иван", marks);
-
-Output_inf(student)
-console.log("===================")
-student1.add_mark("Математика", 5)
-student1.output_all_marks("Математика")
-student1.delete_mark("Математика")
-student1.output_all_marks("Математика")
-student1.output_all_subject();
-student1.average_mark();
+b = true;
+while(b){
+    alert("МЕНЮ\n1 - Площадь круга\n2 - Площадь прямоугольника\n0 - Завершение работы")
+    input = prompt("Введите команду: ")
+    c = parseInt(input)
+    switch(c){
+        case 1:
+            input = prompt("Введите x: ")
+            x = parseInt(input)
+            input = prompt("Введите y: ")
+            y = parseInt(input)
+            input = prompt("Введите радиус круга: ")
+            r = parseInt(input)
+            const circle = new Circle(x, y, r);
+            alert(`Площадь круга равна: ${circle.square()}\nКоординаты центра круга: (${circle.x}; ${circle.y})`)
+            break;
+        case 2:
+            input = prompt("Введите x: ")
+            x = parseInt(input)
+            input = prompt("Введите y: ")
+            y = parseInt(input)
+            input = prompt("Введите длину прямоугольника: ")
+            h = parseInt(input)
+            input = prompt("Введите ширину прямоугольника: ")
+            w = parseInt(input)
+            const rectangle = new Rectangle(x, y, h, w);
+            alert(`Площадь прямоугольника равна: ${rectangle.square()}\nКоординаты центра прямоугольника: (${rectangle.x}; ${rectangle.y})`)
+            break;
+        case 0:
+            alert("Завершение работы")
+            b = false
+            break;
+    }
+}
