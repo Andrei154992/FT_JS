@@ -1,94 +1,29 @@
-class Figure
-{
-    #x;
-    #y;
-
-    constructor(x, y){
-        this.#x = x;
-        this.#y = y;
+function array_1(array){
+    let sum = 0;
+    let count = 0;
+    for(let i = 0; i < array.length; i++){
+        sum += array[i]
+        if (array[i] == 0){
+            sum = 0
+            count++;
+        }
     }
-
-    get x() {
-        return this.#x;
-    }
-
-    get y() {
-        return this.#y;
-    }
-    set x(value) {
-        this.#x = value;
-    }
-
-    set y(value) {
-        this.#y = value;
-    }
-
-    square(){
-        return undefuned
-    }
-     
+    if (count == 0) sum = 0
+    return sum;
 }
 
-class Circle extends Figure 
-{
-    #r;
-
-    constructor(x, y, r){
-        super(x, y);
-        this.#r = r;
+function array_2(matrix){
+    let sum = 0;
+    for (let row of matrix){
+        if (row.some(element => element < 0))
+            sum += row.reduce((acc, val) => acc + val, 0);        
     }
-
-    square(){
-        return Math.PI * this.#r ** 2
-    }
+    
+    return sum;
 }
 
-class Rectangle extends Figure
-{
-    #h;
-    #w;
-    constructor(x, y, h, w){
-        super(x, y);
-        this.#h = h;
-        this.#w = w;
-    }
+let array = [10, 6, 0, 3, 7, 0, 8, 44, 9]
+let matrix = [[10, 11,0], [3, -7, 98], [99, 3, 5]]
 
-    square(){
-        return this.#h * this.#w
-    }
-}
-
-b = true;
-while(b){
-    alert("МЕНЮ\n1 - Площадь круга\n2 - Площадь прямоугольника\n0 - Завершение работы")
-    input = prompt("Введите команду: ")
-    c = parseInt(input)
-    switch(c){
-        case 1:
-            input = prompt("Введите x: ")
-            x = parseInt(input)
-            input = prompt("Введите y: ")
-            y = parseInt(input)
-            input = prompt("Введите радиус круга: ")
-            r = parseInt(input)
-            const circle = new Circle(x, y, r);
-            alert(`Площадь круга равна: ${circle.square()}\nКоординаты центра круга: (${circle.x}; ${circle.y})`)
-            break;
-        case 2:
-            input = prompt("Введите x: ")
-            x = parseInt(input)
-            input = prompt("Введите y: ")
-            y = parseInt(input)
-            input = prompt("Введите длину прямоугольника: ")
-            h = parseInt(input)
-            input = prompt("Введите ширину прямоугольника: ")
-            w = parseInt(input)
-            const rectangle = new Rectangle(x, y, h, w);
-            alert(`Площадь прямоугольника равна: ${rectangle.square()}\nКоординаты центра прямоугольника: (${rectangle.x}; ${rectangle.y})`)
-            break;
-        case 0:
-            alert("Завершение работы")
-            b = false
-            break;
-    }
-}
+alert(`1 задание: ${array_1(array)}`)
+alert(`2 задание: ${array_2(matrix)}`)
